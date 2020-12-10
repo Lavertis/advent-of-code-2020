@@ -30,6 +30,8 @@ public class Main {
         for (int i = index + 1; i < numbers.size(); i++)
             if (numbers.get(i) - numbers.get(index) <= 3)
                 counter += comb(numbers, i, buf);
+            else
+                break;
         buf.set(index, counter);
         return counter;
     }
