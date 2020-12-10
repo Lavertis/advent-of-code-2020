@@ -3,6 +3,7 @@ package com.lavertis.day_10;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,21 @@ public class Main {
         numbers.add(builtInAdapterVoltage);
         Collections.sort(numbers);
         System.out.println("Part 1: " + part1(numbers));
+        List<Long> buf = new ArrayList<>(Collections.nCopies(numbers.size(), -1L));
+        System.out.println("Part 2: " + comb(numbers, 0, buf));
+    }
+
+    public static Long comb(List<Integer> numbers, int index, List<Long> buf) {
+        if (buf.get(index) != -1)
+            return buf.get(index);
+        long counter = 0;
+        if (index == numbers.size() - 1)
+            return 1L;
+        for (int i = index + 1; i < numbers.size(); i++)
+            if (numbers.get(i) - numbers.get(index) <= 3)
+                counter += comb(numbers, i, buf);
+        buf.set(index, counter);
+        return counter;
     }
 
     public static int part1(List<Integer> numbers) {
