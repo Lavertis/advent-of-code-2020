@@ -26,7 +26,7 @@ public class Main {
             String[] tab = s.split(" ");
             List<Integer> places = Arrays.stream(tab[0].split("-")).map(Integer::valueOf).collect(Collectors.toList());
             char c = tab[1].charAt(0);
-            return tab[2].charAt(places.get(0) - 1) == c ^ tab[2].charAt(places.get(1) - 1) == c;
+            return (tab[2].charAt(places.get(0) - 1) == c) ^ (tab[2].charAt(places.get(1) - 1) == c);
         };
         return lines.stream().filter(predicate).count();
     }
